@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
@@ -25,13 +26,21 @@ public class ExampleCodeForJUnit5 extends TestBase {
         step("Go to section 'Wiki'", () -> {
             $("#wiki-tab").click();
         });
-        step("Search and go to page 'Soft assertions'", () -> {
-            $("div.markdown-body").$$("ul li")
-                    .findBy(text("Soft assertions")).$("a").click();
+
+        step("Search Soft Assertions page from list", () -> {
+            $(".js-wiki-more-pages-link").click();
+            $("#wiki-pages-box").shouldHave(text("SoftAssertions"));
+        });
+
+        step("Open Soft Assertions page", () -> {
+            $("#wiki-pages-box").find(byText("SoftAssertions"))
+                    .click();
         });
         step("Check example code for JUnit5 on page 'SoftAssertions'", () -> {
             $("div.markdown-body").$$("div.highlight")
-                    .findBy(text("@ExtendWith({SoftAssertsExtension.class})")).shouldBe(visible);
+                    .findBy(text("@ExtendWith({SoftAssertsExtension.class})"))
+                    .shouldBe(visible);
         });
+
     }
 }
