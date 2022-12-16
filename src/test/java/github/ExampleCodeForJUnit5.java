@@ -23,7 +23,7 @@ public class ExampleCodeForJUnit5 extends TestBase {
             open("https://github.com/selenide/selenide");
         });
         step("Go to section 'Wiki'", () -> {
-            $("#wiki-tab").shouldHave(visible).click();
+            $("#wiki-tab").click();
         });
         step("Search and go to page 'Soft assertions'", () -> {
             $("div.markdown-body").$$("ul li")
